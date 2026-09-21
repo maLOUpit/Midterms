@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Library Management System</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #fffaf0;
+            color: #4a4a4a;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .role-page {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fff4f7;
+        }
+
+        .role-box {
+            background: white;
+            width: 400px;
+            padding: 35px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border-top: 7px solid #f6b6c8;
+        }
+
+        .role-box h1 {
+            color: #d9829b;
+            margin-bottom: 10px;
+        }
+
+        .role-box p {
+            margin-bottom: 25px;
+            color: #777;
+        }
+
+        .role-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .role-buttons button {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #f6b6c8;
+            color: #633d4b;
+            font-size: 16px;
+        }
+
+        .role-buttons button:hover {
+            background: #efa3b9;
+        }
+
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fff4f7;
+        }
+
+        .login-box {
+            background: white;
+            width: 380px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border-top: 7px solid #f6d77a;
+        }
+
+        .login-box h2 {
+            text-align: center;
+            color: #d9829b;
+            margin-bottom: 20px;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #e8cbd3;
+            border-radius: 8px;
+            background: #fffafc;
+        }
+
+        .login-box input:focus {
+            outline: none;
+            border-color: #f2a5bb;
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #f6b6c8;
+            color: #633d4b;
+            margin-top: 5px;
+        }
+
+        .login-box button:hover {
+            background: #efa3b9;
+        }
+
+        .back-btn {
+            background: #b9dfc5 !important;
+            color: #365441 !important;
+        }
+
+        .back-btn:hover {
+            background: #a8d5b5 !important;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 15px;
+            color: #75a982;
+            cursor: pointer;
+        }
+
+        .register-link:hover {
+            text-decoration: underline;
+        }
+
+        .admin-info {
+            margin-top: 15px;
+            padding: 10px;
+            background: #fff3b5;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #6b5b1e;
+        }
+
+        .register-box {
+            background: white;
+            width: 380px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border-top: 7px solid #b9dfc5;
+        }
+
+        .register-box h2 {
+            color: #75a982;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .register-box input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #cfe5d4;
+            border-radius: 8px;
+            background: #fbfffc;
+        }
+
+        .register-box input:focus {
+            outline: none;
+            border-color: #9bcba7;
+        }
+
+        .register-box button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #b9dfc5;
+            color: #365441;
+            margin-top: 5px;
+        }
+
+        .register-box button:hover {
+            background: #a8d5b5;
+        }
+
+        .dashboard {
+            min-height: 100vh;
+            background: #fffaf0;
+        }
+
+        header {
+            background: #f6b6c8;
+            color: #633d4b;
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 5px solid #f6d77a;
+        }
+
+        header h1 {
+            font-size: 22px;
+        }
+
+        header button {
+            background: #fff3b5;
+            color: #6b5b1e;
+            border: none;
+            padding: 9px 15px;
+            border-radius: 8px;
+        }
+
+        header button:hover {
+            background: #f5df91;
+        }
+
+        .content {
+            padding: 30px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .welcome {
+            margin-bottom: 25px;
+        }
+
+        .welcome h2 {
+            color: #75a982;
+            margin-bottom: 5px;
+        }
+
+        .welcome p {
+            color: #777;
+        }
+
+        .book-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+            max-width: 600px;
+            border-left: 7px solid #f6d77a;
+        }
+
+        .book-card h3 {
+            color: #d9829b;
+            margin-bottom: 10px;
+        }
+
+        .book-card p {
+            margin: 8px 0;
+        }
+
+        .status {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .available {
+            background: #cdebd4;
+            color: #477653;
+        }
+
+        .borrowed {
+            background: #f8ccd8;
+            color: #9b5368;
+        }
+
+        .action-btn {
+            margin-top: 18px;
+            padding: 11px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #b9dfc5;
+            color: #365441;
+        }
+
+        .action-btn:hover {
+            background: #a8d5b5;
+        }
+
+        @media (max-width: 600px) {
+
+            .role-box,
+            .login-box,
+            .register-box {
+                width: 90%;
+            }
+
+            .role-buttons {
+                flex-direction: column;
+            }
+
+            header {
+                padding: 15px;
+            }
+
+            header h1 {
+                font-size: 17px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div id="rolePage" class="role-page">
+
+        <div class="role-box">
+
+            <h1>📚 Library System</h1>
+
+            <p>Select your account type</p>
+
+            <div class="role-buttons">
+
+                <button onclick="selectRole('admin')">
+                    Admin
+                </button>
+
+                <button onclick="selectRole('student')">
+                    Student
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="loginPage" class="login-page hidden">
+
+        <div class="login-box">
+
+            <h2 id="loginTitle">
+                Login
+            </h2>
+
+
+            <input
+                type="text"
+                id="username"
+                placeholder="Username"
+            >
+
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+            >
+
+
+            <button onclick="login()">
+                Login
+            </button>
+
+
+            <button
+                class="back-btn"
+                onclick="backToRole()"
+            >
+                Back
+            </button>
+
+
+            <p
+                id="registerLink"
+                class="register-link"
+                onclick="showRegister()"
+            >
+                Create Student Account
+            </p>
+
+
+            <div
+                id="adminInfo"
+                class="admin-info hidden"
+            >
+
+                <b>Default Admin Account</b>
+                <br><br>
+
+                Username: admin
+                <br>
+
+                Password: admin123
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="registerPage" class="login-page hidden">
+
+        <div class="register-box">
+
+            <h2>
+                Student Registration
+            </h2>
+
+
+            <input
+                type="text"
+                id="newUsername"
+                placeholder="Create username"
+            >
+
+
+            <input
+                type="password"
+                id="newPassword"
+                placeholder="Create password"
+            >
+
+
+            <button onclick="registerStudent()">
+                Register
+            </button>
+
+
+            <button
+                class="back-btn"
+                onclick="backToLogin()"
+            >
+                Back to Login
+            </button>
+
+        </div>
+
+    </div>
+
+    <div
+        id="adminDashboard"
+        class="dashboard hidden"
+    >
+
+        <header>
+
+            <h1>
+                📚 Admin Dashboard
+            </h1>
+
+            <button onclick="logout()">
+                Logout
+            </button>
+
+        </header>
+
+
+        <div class="content">
+
+            <div class="welcome">
+
+                <h2>
+                    Library Book
+                </h2>
+
+                <p>
+                    Check the current book status.
+                </p>
+
+            </div>
+
+
+            <div class="book-card">
+
+                <h3 id="adminBookTitle">
+                    Harry Potter and the Sorcerer's Stone
+                </h3>
+
+
+                <p>
+
+                    <b>Author:</b>
+
+                    <span id="adminBookAuthor">
+                        J.K. Rowling
+                    </span>
+
+                </p>
+
+
+                <p>
+
+                    <b>Status:</b>
+
+                    <span id="adminBookStatus">
+                        Available
+                    </span>
+
+                </p>
+
+
+                <p>
+
+                    <b>Borrowed By:</b>
+
+                    <span id="adminBorrower">
+                        None
+                    </span>
+
+                </p>
+
+
+                <p>
+
+                    <b>Borrow Date:</b>
+
+                    <span id="adminBorrowDate">
+                        None
+                    </span>
+
+                </p>
+
+
+                <p>
+
+                    <b>Return Date:</b>
+
+                    <span id="adminDueDate">
+                        None
+                    </span>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div
+        id="studentDashboard"
+        class="dashboard hidden"
+    >
+
+        <header>
+
+            <h1>
+                📚 Student Dashboard
+            </h1>
+
+            <button onclick="logout()">
+                Logout
+            </button>
+
+        </header>
+
+
+        <div class="content">
+
+            <div class="welcome">
+
+                <h2>
+                    Welcome,
+                    <span id="studentName"></span>
+                </h2>
+
+                <p>
+                    Available library book
+                </p>
+
+            </div>
+
+
+            <div class="book-card">
+
+                <h3 id="studentBookTitle">
+                    Harry Potter and the Sorcerer's Stone
+                </h3>
+
+
+                <p>
+
+                    <b>Author:</b>
+
+                    <span id="studentBookAuthor">
+                        J.K. Rowling
+                    </span>
+
+                </p>
+
+
+                <p>
+
+                    <b>Category:</b>
+
+                    Fantasy
+
+                </p>
+
+
+                <p>
+
+                    <b>Status:</b>
+
+                    <span
+                        id="studentBookStatus"
+                        class="status available"
+                    >
+                        Available
+                    </span>
+
+                </p>
+
+
+                <p id="studentDueDate"></p>
+
+
+                <button
+                    id="borrowButton"
+                    class="action-btn"
+                    onclick="borrowBook()"
+                >
+                    Borrow Book
+                </button>
+
+
+                <button
+                    id="returnButton"
+                    class="action-btn hidden"
+                    onclick="returnBook()"
+                >
+                    Return Book
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        let selectedRole = "";
+
+        let currentUser = null;
+
+        let users = JSON.parse(
+            localStorage.getItem("simpleUsers")
+        );
+
+
+        if (!users) {
+
+            users = [
+
+                {
+                    username: "admin",
+                    password: "admin123",
+                    role: "admin"
+                }
+
+            ];
+
+        }
+
+        let book = JSON.parse(
+            localStorage.getItem("simpleBook")
+        );
+
+
+        if (!book) {
+
+            book = {
+
+                id: 1,
+
+                title:
+                    "Harry Potter and the Sorcerer's Stone",
+
+                author:
+                    "J.K. Rowling",
+
+                available: true,
+
+                borrowedBy: "",
+
+                borrowedDate: "",
+
+                dueDate: ""
+
+            };
+
+        }
+
+        function saveData() {
+
+            localStorage.setItem(
+                "simpleUsers",
+                JSON.stringify(users)
+            );
+
+
+            localStorage.setItem(
+                "simpleBook",
+                JSON.stringify(book)
+            );
+
+        }
+
+        function selectRole(role) {
+
+            selectedRole = role;
+
+
+            document
+                .getElementById("rolePage")
+                .classList.add("hidden");
+
+
+            document
+                .getElementById("loginPage")
+                .classList.remove("hidden");
+
+
+            document
+                .getElementById("username")
+                .value = "";
+
+
+            document
+                .getElementById("password")
+                .value = "";
+
+
+            if (role === "admin") {
+
+                document
+                    .getElementById("loginTitle")
+                    .textContent =
+                    "Admin Login";
+
+                document
+                    .getElementById("registerLink")
+                    .classList.add("hidden");
+
+                document
+                    .getElementById("adminInfo")
+                    .classList.remove("hidden");
+
+            }
+
+            else {
+
+                document
+                    .getElementById("loginTitle")
+                    .textContent =
+                    "Student Login";
+
+                document
+                    .getElementById("registerLink")
+                    .classList.remove("hidden");
+
+                document
+                    .getElementById("adminInfo")
+                    .classList.add("hidden");
+
+            }
+
+        }
+
+        function backToRole() {
+
+            document
+                .getElementById("loginPage")
+                .classList.add("hidden");
+
+            document
+                .getElementById("rolePage")
+                .classList.remove("hidden");
+
+            selectedRole = "";
+
+        }
+
+        function login() {
+
+            let username =
+                document
+                    .getElementById("username")
+                    .value
+                    .trim();
+
+
+            let password =
+                document
+                    .getElementById("password")
+                    .value;
+
+            if (
+                username === "" ||
+                password === ""
+            ) {
+
+                alert(
+                    "Please enter your username and password."
+                );
+
+                return;
+            }
+
+            let user = users.find(
+                function(u) {
+
+                    return (
+                        u.username === username &&
+                        u.password === password &&
+                        u.role === selectedRole
+                    );
+
+                }
+            );
+
+            if (!user) {
+
+                alert(
+                    "Incorrect username or password."
+                );
+
+                return;
+
+            }
+
+            currentUser = user;
+
+
+            document
+                .getElementById("loginPage")
+                .classList.add("hidden");
+
+            if (selectedRole === "admin") {
+
+                document
+                    .getElementById("adminDashboard")
+                    .classList.remove("hidden");
+
+                updateAdmin();
+
+            }
+
+            else {
+
+                document
+                    .getElementById("studentDashboard")
+                    .classList.remove("hidden");
+
+                document
+                    .getElementById("studentName")
+                    .textContent =
+                    currentUser.username;
+
+                updateStudent();
+
+            }
+
+        }
+
+        function showRegister() {
+
+            document
+                .getElementById("loginPage")
+                .classList.add("hidden");
+
+
+            document
+                .getElementById("registerPage")
+                .classList.remove("hidden");
+
+        }
+   
+        function backToLogin() {
+
+            document
+                .getElementById("registerPage")
+                .classList.add("hidden");
+
+
+            document
+                .getElementById("loginPage")
+                .classList.remove("hidden");
+
+        }
+
+        function registerStudent() {
+
+            let username =
+                document
+                    .getElementById("newUsername")
+                    .value
+                    .trim();
+
+            let password =
+                document
+                    .getElementById("newPassword")
+                    .value;
+
+            if (
+                username === "" ||
+                password === ""
+            ) {
+
+                alert(
+                    "Please complete all fields."
+                );
+
+                return;
+
+            }
+
+            let existingUser =
+                users.find(
+                    function(u) {
+
+                        return u.username === username;
+
+                    }
+                );
+
+            if (existingUser) {
+
+                alert(
+                    "Username already exists."
+                );
+
+                return;
+
+            }
+
+            users.push({
+
+                username: username,
+
+                password: password,
+
+                role: "student"
+
+            });
+
+            saveData();
+
+            alert(
+                "Student account created successfully!"
+            );
+
+            document
+                .getElementById("newUsername")
+                .value = "";
+
+
+            document
+                .getElementById("newPassword")
+                .value = "";
+
+
+            backToLogin();
+
+        }
+
+        function updateAdmin() {
+
+            document
+                .getElementById("adminBookTitle")
+                .textContent =
+                book.title;
+
+            document
+                .getElementById("adminBookAuthor")
+                .textContent =
+                book.author;
+
+            let status =
+                document
+                    .getElementById("adminBookStatus");
+
+            if (book.available) {
+
+                status.textContent =
+                    "Available";
+
+                status.className =
+                    "status available";
+
+            }
+
+            else {
+
+                status.textContent =
+                    "Borrowed";
+
+                status.className =
+                    "status borrowed";
+
+            }
+
+            document
+                .getElementById("adminBorrower")
+                .textContent =
+                book.borrowedBy || "None";
+
+            document
+                .getElementById("adminBorrowDate")
+                .textContent =
+                book.borrowedDate || "None";
+
+            document
+                .getElementById("adminDueDate")
+                .textContent =
+                book.dueDate || "None";
+
+        }
+
+        function updateStudent() {
+
+            let status =
+                document
+                    .getElementById("studentBookStatus");
+
+            let borrowButton =
+                document
+                    .getElementById("borrowButton");
+
+            let returnButton =
+                document
+                    .getElementById("returnButton");
+
+            let dueDate =
+                document
+                    .getElementById("studentDueDate");
+
+            if (book.available) {
+
+                status.textContent =
+                    "Available";
+
+                status.className =
+                    "status available";
+
+                borrowButton
+                    .classList
+                    .remove("hidden");
+
+                returnButton
+                    .classList
+                    .add("hidden");
+
+                dueDate.textContent = "";
+
+            }
+
+            else {
+
+                status.textContent =
+                    "Borrowed";
+
+                status.className =
+                    "status borrowed";
+
+                if (
+                    book.borrowedBy ===
+                    currentUser.username
+                ) {
+
+                    borrowButton
+                        .classList
+                        .add("hidden");
+
+                    returnButton
+                        .classList
+                        .remove("hidden");
+
+                    dueDate.innerHTML =
+                        "<b>Return Date:</b> " +
+                        book.dueDate;
+
+                }
+
+                else {
+
+                    borrowButton
+                        .classList
+                        .add("hidden");
+
+                    returnButton
+                        .classList
+                        .add("hidden");
+
+                    dueDate.textContent =
+                        "This book is currently borrowed.";
+
+                }
+
+            }
+
+        }
+
+        function borrowBook() {
+
+            if (!currentUser) {
+
+                alert(
+                    "Please login first."
+                );
+
+                return;
+
+            }
+
+            if (!book.available) {
+
+                alert(
+                    "This book is not available."
+                );
+
+                return;
+
+            }
+
+            let today = new Date();
+
+            let due = new Date();
+
+            due.setDate(
+                due.getDate() + 4
+            );
+
+            book.available = false;
+
+            book.borrowedBy =
+                currentUser.username;
+
+            book.borrowedDate =
+                formatDate(today);
+
+            book.dueDate =
+                formatDate(due);
+
+            saveData();
+
+            updateStudent();
+
+            alert(
+                "Book borrowed successfully!\n\n" +
+                "Return Date: " +
+                book.dueDate
+            );
+
+        }
+
+        function returnBook() {
+
+            if (!currentUser) {
+
+                return;
+
+            }
+
+            if (
+                book.borrowedBy !==
+                currentUser.username
+            ) {
+
+                alert(
+                    "You cannot return this book."
+                );
+
+                return;
+
+            }
+
+            book.available = true;
+
+            book.borrowedBy = "";
+
+            book.borrowedDate = "";
+
+            book.dueDate = "";
+
+            saveData();
+
+            updateStudent();
+
+            alert(
+                "Book returned successfully!"
+            );
+
+        }
+
+        function formatDate(date) {
+
+            let month =
+                String(
+                    date.getMonth() + 1
+                ).padStart(2, "0");
+
+
+            let day =
+                String(
+                    date.getDate()
+                ).padStart(2, "0");
+
+            let year =
+                date.getFullYear();
+
+            return (
+                month +
+                "/" +
+                day +
+                "/" +
+                year
+            );
+
+        }
+
+        function logout() {
+
+            currentUser = null;
+
+            selectedRole = "";
+
+            document
+                .getElementById("adminDashboard")
+                .classList.add("hidden");
+
+            document
+                .getElementById("studentDashboard")
+                .classList.add("hidden");
+
+            document
+                .getElementById("loginPage")
+                .classList.add("hidden");
+
+            document
+                .getElementById("registerPage")
+                .classList.add("hidden");
+
+            document
+                .getElementById("rolePage")
+                .classList.remove("hidden");
+
+            document
+                .getElementById("username")
+                .value = "";
+
+            document
+                .getElementById("password")
+                .value = "";
+
+        }
+
+        saveData();
+
+    </script>
+
+</body>
+
+</html>
